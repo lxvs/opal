@@ -49,11 +49,11 @@ setupOp () {
         return 1
     fi
 
-    "$sedu" --initialsetup debug "$dev"
-    "$sedu" --enablelockingrange 0 debug "$dev"
-    "$sedu" --setlockingrange 0 lk debug "$dev"
-    "$sedu" --setmbrdone off debug "$dev"
-    "$sedu" --loadpbaimage debug "$pba" "$dev"
+    "$sedu" --initialsetup "$psw" "$dev"
+    "$sedu" --enablelockingrange 0 "$psw" "$dev"
+    "$sedu" --setlockingrange 0 lk "$psw" "$dev"
+    "$sedu" --setmbrdone off "$psw" "$dev"
+    "$sedu" --loadpbaimage "$psw" "$pba" "$dev"
 }
 
 setpwdOp () {
@@ -72,8 +72,8 @@ setpwdOp () {
     sid="$2"
     adm="$3"
 
-    "$sedu" --setsidpassword debug "$sid" "$dev"
-    "$sedu" --setadmin1pwd debug "$adm" "$dev"
+    "$sedu" --setsidpassword "$psw" "$sid" "$dev"
+    "$sedu" --setadmin1pwd "$psw" "$adm" "$dev"
 }
 
 revertOp () {
@@ -96,6 +96,7 @@ revertOp () {
 main () {
     local arg
     local sedu="sedutil-cli"
+    local psw='debug'
     while test $# -ge 1
     do
         arg="$1"
